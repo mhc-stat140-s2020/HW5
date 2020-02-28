@@ -1,0 +1,151 @@
+---
+title: 'STAT 140: Homework 5'
+subtitle: "Sections 3.4, 4.3"
+author: "YOUR NAME HERE"
+date: "3/6/2020"
+output: pdf_document
+
+---
+
+## BOOK EXERCISES (OpenIntro Statistics, Fourth Edition)
+
+#### 3.29) College smokers. At a university, 13% of students smoke.
+
+#### (a) Calculate the expected number of smokers in a random sample of 100 students from this university.
+
+#### (b) The university gym opens at 9 am on Saturday mornings. One Saturday morning at 8:55 am there are 27 students outside the gym waiting for it to open. Should you use the same approach from part (a) to calculate the expected number of smokers among these 27 students?
+
+#### 3.43) Cost of breakfast. Sally gets a cup of coffee and a muffin every day for breakfast from one of the many coffee shops in her neighborhood. She picks a coffee shop each morning at random and independently of previous days. The average price of a cup of coffee is `$1.40` with a standard deviation of `$0.30`, the average price of a muffin is `$2.50` with a standard deviation of `$0.15`, and the two prices are independent of each other.
+
+#### (a) What is the mean and standard deviation of the amount she spends on breakfast daily?
+
+#### (b) What is the mean and standard deviation of the amount she spends on breakfast weekly?
+
+#### 4.22) A Gallup Poll found that `7%` of teenagers (ages 13 to 17) suffer from arachnophobia and are extremely afraid of spiders. At a summer camp, there are 10 teenagers sleeping in each tent. Assume that these 10 teenagers are independent of each other.
+
+#### (a) Calculate the probability that at least one of them suffers from arachnophobia.
+
+#### (b) Calculate the probability that exactly 2 of them suffer from arachnophobia.
+
+#### (c) Calculate the probability that at most 1 of them suffers from arachnophobia.
+
+#### (d) If the camp counselor wants to make sure no more than 1 teenager in each tent is afraid of spiders, does it seem reasonable for them to randomly assign teenagers to tents?
+
+#### 4.35) Roulette winnings. In the game of roulette, a wheel is spun and you place bets on where it will stop. One popular bet is that it will stop on a red slot; such a bet has an 18/38 chance of winning. You pay $1 to play. If it stops on red, you get $2. If not, you lose $1. Suppose you play 3 times. 
+
+#### (a) Let the random variable X represent the number of wins. Does X follow a binomial distribution (check conditions)? What are the parameters?
+
+
+#### (b) There are four possible outcomes we can observe. Denote each of the four outcomes using probability notation and find the probability of each.
+
+**Answer:**
+
+**Answer:**
+
+**Answer:**
+
+**Answer:**
+
+#### (c) Let the random variable Y represent the total amount won or lost. Write a probability model for Y (use a probability distribution table like in Chapter 3). You can use the table below and replace the outcomes and probabilities with the appropriate numbers.
+
+\begin{table}
+\centering
+\begin{tabular}{l|rrrr}
+$i$ & 1 & 2 & 3 & 4\\
+\hline
+$y_i$ & Outcome 1 & Outcome 2 & Outcome 3 & Outcome 4\\
+$P(Y=y_i)$ & Probability 1 & Probability 2 & Probability 3 & Probability 4
+\end{tabular}
+\caption{4.35(c) probability distribution table}
+\end{table}
+
+#### 4.48) Multiple choice quiz. In a multiple choice quiz there are 5 questions and 4 choices for each question (a, b, c, d). Robin has not studied for the quiz at all, and decides to randomly guess the answers. What is the probability that
+
+#### (a) the first question she gets right is the 3rd question?
+
+#### (b) she gets exactly 3 or exactly 4 questions right?
+
+#### (c) she gets the majority of the questions right?
+
+
+## R Exercises
+
+#### 1) Suppose you are ordering pizza for dinner. You are really hungry and want your pizza in less than 20 minutes. This exercise involves a review of the pbinom(), dbinom(), and rbinom() functions we saw in class. Let X represent the total number of deliveries made in under 20 minutes; the probability of a pizza delivery in less than 20 minutes (p) is 0.0228.
+
+#### (a) Suppose we randomly sample 10 deliveries. What is the probability of observing no pizza delivery times of less than 20 minutes?
+
+```{r}
+
+```
+
+#### (b) Suppose we randomly sample 10 deliveries. What is the probability of observing at least one pizza delivery time of less than 20 minutes?
+
+```{r}
+
+```
+
+
+#### (c) Suppose we randomly sample 100 deliveries. What is the probabiliy of observing more than 5 pizza delivery times of less than 20 minutes?
+
+```{r}
+
+```
+
+
+#### (d) Suppose we randomly sample 100 deliveries. What is the probabiliy of observing exactly 5 pizza delivery times of less than 20 minutes?
+
+```{r}
+
+```
+
+#### (e) Suppose we randomly sample 100 deliveries. What is the expected number of delivery times of less than 20 minutes?
+
+#### (f) Using the rbinom() function, generate 1000 realizations of (i) 10 deliveries, (ii) 100 deliveries, and (iii) 500 deliveries. Then, make histograms for (i)-(iii).
+
+```{r}
+
+```
+
+#### (g) What do you notice about the shapes of the histograms for (i)-(iii)?
+
+
+
+#### 2) Let's revist the roulette winnings problem. Sometimes it is helpful to run through simulations (where we make up the data according to some model) to get intuition about a problem. Here, the model for X, the number of wins, is:
+
+$$
+X \sim Binomial(n=3,p=18/38)
+$$
+
+#### (a) Run the following code to generate 10000 simulated outcomes (trials). You do not need to modify anything. 
+
+```{r}
+binom_sim <- data.frame(trials=rbinom(10000, 3, 18/38))
+```
+
+#### (b) Make an appropriate plot to summarize the results of your simulation.
+
+```{r}
+library(ggplot2)
+```
+
+#### (c) What is the mean of your simulated outcomes (use R). How does this compare to the theoretical mean for this Binomial distribution?
+
+```{r}
+
+```
+
+#### (d) What is the variance of your simulated outcomes (use R). How does this compare to the theoretical variance for this Binomial distribution?
+
+```{r}
+
+```
+
+
+#### (e) The following code will create another column, which is the winnings (in dollars) for each trial. What is the mean of your simulated outcomes (use R)? How does this compare to the theoretical mean for the distribution of Y (as defined in Question 4.35)?
+
+```{r}
+n <- 3
+binom_sim$winnings <- 2*binom_sim$trials+n*(-1)
+```
+
+#### (f) Using your answer from (e), do you expect to make money playing this game? Does this surprise you?

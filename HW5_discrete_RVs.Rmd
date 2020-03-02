@@ -63,6 +63,8 @@ $P(Y=y_i)$ & Probability 1 & Probability 2 & Probability 3 & Probability 4
 
 #### (a) the first question she gets right is the 3rd question?
 
+Please skip this question - this relates to the geometric distribution.
+
 #### (b) she gets exactly 3 or exactly 4 questions right?
 
 #### (c) she gets the majority of the questions right?
